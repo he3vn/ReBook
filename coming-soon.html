@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coming soon</title>
+    <meta name="description" content="TAPPEI NAGATSUKI — Re:Zero, Starting Life in Another World. This part of the site is being made." />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <style>
+      :root {
+        --ink: #1d1d1d;
+        --muted: rgba(29, 29, 29, 0.55);
+        --serif: Romie, Georgia, serif;
+        --sans: avenir-lt-pro, Helvetica, Arial, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        color: var(--ink);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+      }
+      .cs {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.2rem;
+        padding: 3rem 1.6rem;
+        text-align: center;
+      }
+      .cs__brand {
+        font-family: var(--serif);
+        font-size: 0.85rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .cs__title {
+        margin: 0;
+        font-family: var(--serif);
+        font-weight: 300;
+        font-size: clamp(3rem, 12vw, 7rem);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+      }
+      .cs__rule {
+        width: 4rem;
+        height: 1px;
+        background: var(--ink);
+        opacity: 0.35;
+      }
+      .cs__text {
+        margin: 0;
+        max-width: 34ch;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      .cs__back {
+        margin-top: 1.4rem;
+        display: inline-block;
+        padding: 0.85rem 1.7rem;
+        border: 1px solid rgba(29, 29, 29, 0.25);
+        border-radius: 999px;
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ink);
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      .cs__back:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- The text -->
+    <main class="cs">
+      <p class="cs__brand">Re:Book</p>
+      <h1 class="cs__title">Coming soon</h1>
+      <div class="cs__rule"></div>
+      <p class="cs__text">
+        This part of the site is being made.
+      </p>
+      <a class="cs__back" href="index.html">&larr; Back to home</a>
+    </main>
+  </body>
+</html>
