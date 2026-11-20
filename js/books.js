@@ -1,7 +1,4 @@
 
-
-
-
 (() => {
   if (typeof gsap === "undefined") return;
 
