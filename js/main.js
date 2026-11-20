@@ -1,13 +1,13 @@
-// re-book — the behaviour of the home screen.
-//
-//   * smooth scrolling (Lenis) and the section links in the nav
-//   * the hero banner (Swiper) with its two Tappei photos
-//   * the search panel: it opens, and it never sends you anywhere
-//   * the recommendation cards reveal themselves as you read down the page
-//   * the "Starring" strip can be dragged
-//
-// Everything is guarded: if a piece is missing from the page, that part of
-// the script simply does nothing.
+
+
+
+
+
+
+
+
+
+
 
 (() => {
   "use strict";
@@ -21,7 +21,7 @@
       try {
         CustomEase.create("osmo", "0.625, 0.05, 0, 1");
       } catch (e) {
-        /* already created */
+        
       }
       gsap.defaults({ ease: "osmo", duration: 0.7 });
     }
@@ -29,9 +29,9 @@
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------------------------------------------------------------------
-     1. smooth scrolling
-     --------------------------------------------------------------------- */
+  
+
+
   const getLenis = () => {
     try {
       return typeof lenis !== "undefined" && lenis ? lenis : null;
@@ -49,7 +49,7 @@
     window.scrollTo({ top: y, behavior: reduced ? "auto" : "smooth" });
   };
 
-  // Lenis itself: it only becomes a global once it is created.
+  
   if (typeof Lenis !== "undefined" && !getLenis() && !reduced) {
     try {
       window.lenis = new Lenis({
@@ -58,7 +58,7 @@
         wheelMultiplier: 1,
       });
     } catch (e) {
-      /* no smooth scrolling then */
+      
     }
   }
 
@@ -71,8 +71,8 @@
     gsap.ticker.lagSmoothing(0);
   })();
 
-  // the nav links: Our books -> top, Author -> featured, The team -> the
-  // team band, Contact -> the end of the page.
+  
+  
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     const id = link.getAttribute("href").slice(1);
     if (!id) return;
@@ -95,9 +95,9 @@
     });
   });
 
-  /* ---------------------------------------------------------------------
-     2. the mobile menu
-     --------------------------------------------------------------------- */
+  
+
+
   (() => {
     const button = document.querySelector(".nav_menu-button");
     const menus = document.querySelectorAll(".rb-nav-menu");
@@ -120,9 +120,9 @@
     });
   })();
 
-  /* ---------------------------------------------------------------------
-     3. the hero banner
-     --------------------------------------------------------------------- */
+  
+
+
   (() => {
     const root = document.querySelector(".section_home-banner .swiper");
     if (!root) return;
@@ -177,7 +177,7 @@
       start();
     };
 
-    // pause the rotation while the hero is off-screen
+    
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(
         (entries) =>
@@ -189,9 +189,9 @@
     }
   })();
 
-  /* ---------------------------------------------------------------------
-     4. the search panel — it opens, and it never goes anywhere
-     --------------------------------------------------------------------- */
+  
+
+
   (() => {
     const block = document.querySelector(".nav_search-block");
     if (!block) return;
@@ -217,7 +217,7 @@
       if (e.key === "Escape") close();
     });
 
-    // the form: no navigation, just the "coming soon" message.
+    
     const form = document.querySelector("#reboot-search-form");
     if (form) {
       form.setAttribute("onsubmit", "return false");
@@ -250,9 +250,9 @@
     }
   })();
 
-  /* ---------------------------------------------------------------------
-     4. the team band — the name you point at brings up its logo
-     --------------------------------------------------------------------- */
+  
+
+
   (() => {
     const names = [...document.querySelectorAll(".author_name")];
     const logos = [...document.querySelectorAll(".authors_background-item")];
@@ -296,9 +296,9 @@
       });
     }
 
-    // The names sit in their own column. Lenis must keep control of the
-    // wheel over the whole page, so the column only takes the wheel away
-    // from Lenis when it really scrolls on its own.
+    
+    
+    
     const column = document.querySelector(".authors_list-wrapper");
     const syncLenisPrevent = () => {
       if (!column) return;
@@ -313,7 +313,7 @@
     window.addEventListener("resize", syncLenisPrevent);
     window.addEventListener("load", syncLenisPrevent);
 
-    // Which name is in the middle of the screen decides the logo.
+    
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver(
         (entries) => {
@@ -344,9 +344,9 @@
     start();
   })();
 
-  /* ---------------------------------------------------------------------
-     5. the reading animations — the page reveals itself as you scroll
-     --------------------------------------------------------------------- */
+  
+
+
   if (hasGsap && !reduced) {
     const reveal = (selector, opts = {}) => {
       const els = document.querySelectorAll(selector);
@@ -370,7 +370,7 @@
       );
     };
 
-    // the cards come up one after the other
+    
     (() => {
       const slider = document.querySelector(".rb-slider-wrap .books-slider");
       if (!slider) return;
@@ -390,15 +390,15 @@
       observer.observe(slider);
     })();
 
-    // the introduction
+    
     reveal(".section_intro .intro_wrapper > *", {
       trigger: ".section_intro",
       y: 40,
       stagger: 0.12,
     });
 
-    // the section titles — each block needs its own trigger, otherwise the
-    // block above the trigger stays hidden until the trigger is reached.
+    
+    
     reveal(".section_home-authors .home_authors-header > *", {
       trigger: ".section_home-authors",
       y: 24,
@@ -408,7 +408,7 @@
       y: 24,
     });
 
-    // the featured card: the picture comes first, then the words
+    
     reveal(".featured_card .image_featured", {
       trigger: ".section_home-featured",
       y: 40,
@@ -420,14 +420,14 @@
       stagger: 0.1,
     });
 
-    // the team band
+    
     reveal(".authors_home-wrapper .author_item", {
       trigger: ".authors_home-wrapper",
       y: 20,
       stagger: 0.07,
     });
 
-    // the starring strip
+    
     reveal(".rb-starring__item", {
       trigger: ".rb-starring",
       y: 30,
@@ -435,15 +435,15 @@
       start: "top 92%",
     });
   } else {
-    // no animation: show everything straight away
+    
     document
       .querySelectorAll(".rb-slider-wrap .books-slider")
       .forEach((el) => el.classList.add("is--in"));
   }
 
-  /* ---------------------------------------------------------------------
-     6. the "Starring" strip can be dragged
-     --------------------------------------------------------------------- */
+  
+
+
   (() => {
     const track = document.querySelector(".rb-starring__track");
     if (!track) return;
@@ -477,7 +477,7 @@
       track.scrollLeft = startScroll - dx;
     });
 
-    // a drag must not open the volume page behind it
+    
     track.addEventListener(
       "click",
       (e) => {

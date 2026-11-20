@@ -1,3 +1,14 @@
+/*!
+ * Lenis
+ * https://github.com/darkroomengineering/lenis
+ *
+ * @license MIT License, Copyright (c) studio-freight (darkroom.engineering)
+ * Subject to the terms of the MIT License.
+ *
+ * This code was not written by me and I did not spend hours making it.
+ * It is third-party code, used under the license above.
+ */
+
 var t, e;
 (t = this),
   (e = function () {

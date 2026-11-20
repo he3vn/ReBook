@@ -4,7 +4,11 @@
  *
  * @license Copyright 2026, GreenSock. All rights reserved. Subject to the terms at https://gsap.com/standard-license.
  * @author: Jack Doyle
- */
+
+ *
+ * This code was not written by me and I did not spend hours making it.
+ * It is third-party code, used under the license above.
+*/
 
 (function (k, A) {
   typeof exports == "object" && typeof module != "undefined"

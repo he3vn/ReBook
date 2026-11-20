@@ -1,6 +1,6 @@
-// re-book — the Aardvark book slider: the draggable row of book cards, the
-// handwritten note reveal and the contrast check that puts black or white
-// type on each card background.
+
+
+
 
 (() => {
   if (typeof gsap === "undefined") return;
@@ -13,9 +13,9 @@
   const nextPage = document;
   const rafs = [];
 
-  // ---------------------------------------------------------------------
-  // ParallaxSlider — Aardvark's books slider
-  // ---------------------------------------------------------------------
+  
+  
+  
   class ParallaxSlider extends Smooothy {
     constructor(wrapper, config = {}) {
       super(wrapper, config);
@@ -32,9 +32,9 @@
         const direction = index % 2 === 0 ? -1 : 1;
 
         const rotation = gsap.utils.random(1.5, 3, 0.1) * direction;
-        // Aardvark drifts the cards up and down as the row scrolls. We keep
-        // the tilt but drop the vertical drift so every card stays on one
-        // horizontal line.
+        
+        
+        
         const yOffset = 0;
 
         el.style.setProperty("--book-slider-item-rotate", `${-rotation}deg`);
@@ -132,7 +132,7 @@
         const strength = Math.sin(clamped * 1.2);
 
         const moveY = strength * yOffset;
-        // No parallax tilt either — the cards stay on one horizontal line.
+        
         const rotate = 0;
 
         el.style.transform = `translateY(${moveY}%) rotate(${rotate}deg)`;

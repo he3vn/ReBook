@@ -1,3 +1,14 @@
+/*!
+ * Smooothy
+ * https://github.com/vallafederico/smooothy
+ *
+ * @license MIT License, Copyright (c) Federico Vallà (vallafederico)
+ * Subject to the terms of the MIT License.
+ *
+ * This code was not written by me and I did not spend hours making it.
+ * It is third-party code, used under the license above.
+ */
+
 (() => {
   var N = Object.create;
   var {
