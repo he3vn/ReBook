@@ -19,9 +19,73 @@
 <link href="css/fonts.css?v=7" rel="stylesheet"/>
 <link href="css/slider.css?v=7" rel="stylesheet"/>
 <link href="css/reboot.css?v=7" rel="stylesheet"/>
+<style>
+  .rb-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding: 40px;
+    background: #12100e;
+    color: #f2efe9;
+    text-align: center;
+  }
+  .rb-loader.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  .rb-loader__title {
+    font-family: 'Champ', Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 8vw, 6.5rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: #f2efe9;
+  }
+  .rb-loader__note {
+    max-width: 34em;
+    margin: 0;
+    text-align: center;
+    font-family: 'Degular', Arial, sans-serif;
+    font-weight: 300;
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    line-height: 1.6;
+    opacity: 0.75;
+  }
+</style>
 </head>
 <body>
     <!-- Starting the body -->
+<div class="rb-loader" id="rb-loader">
+  <div class="rb-loader__title">This is RE:Book</div>
+  <p class="rb-loader__note">PS: I love Re:zero thats why I made this site, I do not endorse/condone piracy</p>
+</div>
+<script>
+  (() => {
+    const KEY = "rb-loader-shown";
+    const loader = document.getElementById("rb-loader");
+    const force = new URLSearchParams(window.location.search).has("loader");
+    let seen = false;
+    try { seen = localStorage.getItem(KEY) === "1"; } catch (e) {}
+
+    if (seen && !force) {
+      loader.remove();
+      return;
+    }
+
+    try { localStorage.setItem(KEY, "1"); } catch (e) {}
+
+    setTimeout(() => {
+      loader.classList.add("is-hidden");
+      setTimeout(() => loader.remove(), 700);
+    }, 4000);
+  })();
+</script>
 <div class="page-wrapper home-page">
    <!--Nav bar ima add one at the end --> 
 <div class="nav_wrapper">
@@ -584,6 +648,6 @@
 <script src="js/main.js?v=5"></script>
 <script src="js/books.js?v=4"></script>
 <script src="quotes/quotes.js?v=3"></script>
-<script src="js/music.js?v=2"></script>
+<script src="js/music.js?v=3"></script>
 </body>
 </html>

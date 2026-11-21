@@ -1,8 +1,8 @@
 (() => {
   const S = [
-    { src: "music/recollect.mp3", cover: "https://picsum.photos/seed/mp1/100", title: "Song Title 1", artist: "Artist 1" },
-    { src: "music/staypeak.mp3", cover: "https://picsum.photos/seed/mp2/100", title: "Song Title 2", artist: "Artist 2" },
-    { src: "music/styxhelix.mp3", cover: "https://picsum.photos/seed/mp3/100", title: "Song Title 3", artist: "Artist 3" }
+    { src: "music/recollect.mp3", cover: "s.jpeg", title: "Re:Collect", artist: "Konomi Suzuki" },
+    { src: "music/staypeak.mp3", cover: "stayalive.jpeg", title: "Stay Alive", artist: "Rie Takanashi" },
+    { src: "music/styxhelix.mp3", cover: "styx.jpeg", title: "Styx Helix", artist: "Myth and Roid" }
   ];
 
   const nav = document.getElementById("nav-right");
@@ -42,7 +42,7 @@
   </div>
   <input type="range" value="0" min="0" max="100" step="0.1" aria-label="Seek">
   <button class="mp-m" type="button" aria-label="Mute"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg></button>
-  <audio preload="auto"></audio>
+  <audio preload="auto" autoplay></audio>
 </div>`;
 
   const r = document.getElementById("music-player");
@@ -71,10 +71,18 @@
 
   const go = (k) => {
     load(k);
+    a.muted = false;
     a.play().catch(() => {});
   };
 
-  q(".mp-p").onclick = () => (a.paused ? a.play().catch(() => {}) : a.pause());
+  q(".mp-p").onclick = () => {
+    if (a.paused) {
+      a.muted = false;
+      a.play().catch(() => {});
+    } else {
+      a.pause();
+    }
+  };
   q(".mp-n").onclick = () => go(n + 1);
   q(".mp-b").onclick = () => go(n - 1);
   q(".mp-m").onclick = (e) => {
@@ -93,16 +101,56 @@
   load(0);
   a.load();
 
+  const events = ["click", "pointerdown", "keydown", "touchstart", "scroll", "wheel"];
+  const KEY = "rb-music-started";
+
+  const setMuteStyle = () => {
+    q(".mp-m").style.opacity = a.muted ? 0.4 : 1;
+  };
+
   const startAudio = () => {
-    a.play().then(() => {
-      ["pointerdown", "click", "keydown", "touchstart"].forEach((ev) =>
-        document.removeEventListener(ev, startAudio)
-      );
+    a.muted = false;
+    setMuteStyle();
+    const p = a.play();
+    if (!p || !p.then) return;
+    p.then(() => {
+      try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+      events.forEach((ev) => window.removeEventListener(ev, startAudio, true));
     }).catch(() => {});
   };
 
-  startAudio();
-  ["pointerdown", "click", "keydown", "touchstart"].forEach((ev) =>
-    document.addEventListener(ev, startAudio)
-  );
+  const tryPlay = () => {
+    if (a.paused === false) return;
+    const p = a.play();
+    if (!p || !p.then) return;
+    p.then(() => {
+      if (!a.muted) {
+        try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+      }
+    }).catch(() => {
+      a.muted = true;
+      setMuteStyle();
+      const m = a.play();
+      if (!m || !m.then) return;
+      m.then(() => {
+        a.muted = false;
+        setMuteStyle();
+        const u = a.play();
+        if (u && u.then) u.catch(() => {});
+      }).catch(() => {});
+    });
+  };
+
+  const autoplay = () => {
+    a.muted = false;
+    setMuteStyle();
+    tryPlay();
+    ["canplay", "loadeddata", "canplaythrough"].forEach((ev) => a.addEventListener(ev, tryPlay, { once: true }));
+    setTimeout(tryPlay, 300);
+    setTimeout(tryPlay, 900);
+    setTimeout(tryPlay, 2000);
+  };
+
+  autoplay();
+  events.forEach((ev) => window.addEventListener(ev, startAudio, { capture: true, passive: true }));
 })();

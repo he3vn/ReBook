@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery</title>
+    <link rel="icon" href="images/rem.png" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <style>
+      body {
+        margin: 0;
+        background: #12100e;
+        color: #f2efe9;
+        font-family: 'avenir-lt-pro', 'Avenir Next', Avenir, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .gl-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 1.4rem 2rem;
+        background: rgba(18, 16, 14, 0.92);
+        border-bottom: 1px solid rgba(242, 239, 233, 0.14);
+      }
+      .gl-head a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .gl-logo {
+        font-family: 'Romie', Georgia, serif;
+        font-size: 1.5rem;
+      }
+      .gl-nav {
+        display: flex;
+        gap: 1.75rem;
+      }
+      .gl-nav a {
+        font-size: 0.75rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        opacity: 0.7;
+        transition: opacity 0.25s;
+      }
+      .gl-nav a:hover {
+        opacity: 1;
+      }
+      .gl-title-block {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 5rem 2rem 2.5rem;
+        text-align: center;
+      }
+      .gl-eyebrow {
+        margin: 0 0 1rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        opacity: 0.55;
+      }
+      .gl-title {
+        margin: 0;
+        font-family: 'Champ', Arial, sans-serif;
+        font-weight: 700;
+        font-size: clamp(2.6rem, 7vw, 5.5rem);
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+      .gl-lede {
+        max-width: 40em;
+        margin: 1.75rem auto 0;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        opacity: 0.75;
+      }
+      .gl-nav-pills {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1rem 2rem;
+        background: rgba(18, 16, 14, 0.92);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(242, 239, 233, 0.14);
+      }
+      .gl-nav-pills a {
+        padding: 0.45rem 0.95rem;
+        border: 1px solid rgba(242, 239, 233, 0.3);
+        border-radius: 999px;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: inherit;
+        transition: background 0.25s, color 0.25s;
+      }
+      .gl-nav-pills a:hover {
+        background: #f2efe9;
+        color: #12100e;
+      }
+      .gl-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+      .gl-ep {
+        padding: 4rem 0;
+        border-top: 1px solid rgba(242, 239, 233, 0.14);
+      }
+      .gl-ep__head {
+        display: flex;
+        align-items: baseline;
+        gap: 1.25rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+      .gl-ep__num {
+        margin: 0;
+        font-family: 'Champ', Arial, sans-serif;
+        font-weight: 700;
+        font-size: clamp(2rem, 4.5vw, 3.4rem);
+        line-height: 1;
+        color: #e6d3b3;
+      }
+      .gl-ep__title {
+        margin: 0;
+        font-family: 'Champ', Arial, sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.4rem, 3vw, 2.2rem);
+        line-height: 1.1;
+        text-transform: uppercase;
+      }
+      .gl-ep__count {
+        margin: 0 0 0 auto;
+        font-size: 0.75rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        opacity: 0.55;
+      }
+      .gl-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.1rem;
+      }
+      .gl-item {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        border-radius: 0.8rem;
+        background: #221e1a;
+      }
+      .gl-item img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+      .gl-item:hover img {
+        transform: scale(1.05);
+      }
+      .gl-item__num {
+        position: absolute;
+        left: 0.6rem;
+        top: 0.6rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.4rem;
+        background: rgba(18, 16, 14, 0.75);
+        color: #f2efe9;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+      }
+      .gl-foot {
+        margin-top: 5rem;
+        padding: 3rem 2rem;
+        border-top: 1px solid rgba(242, 239, 233, 0.14);
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        opacity: 0.5;
+        text-align: center;
+      }
+      @media (max-width: 900px) {
+        .gl-wrap {
+          padding: 0 1.25rem;
+        }
+        .gl-head {
+          padding: 1.1rem 1.25rem;
+        }
+        .gl-nav {
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="gl-head">
+      <a class="gl-logo" href="index.html">Re:Zero</a>
+      <nav class="gl-nav">
+        <a href="index.html#top">Home</a>
+        <a href="characters.html">Characters</a>
+        <a href="gallery.html">Gallery</a>
+      </nav>
+    </header>
+
+    <div class="gl-title-block">
+      <p class="gl-eyebrow">Season four</p>
+      <h1 class="gl-title">Gallery</h1>
+      <p class="gl-lede">Some Season4 images I HANDPICKED.</p>
+    </div>
+
+    <nav class="gl-nav-pills" id="gl-nav"></nav>
+
+    <main id="gl-main" class="gl-wrap"></main>
+
+    <div class="gl-foot">© 2026 RE:BOOK. All glaze reserved.</div>
+
+    <script src="js/gallery-data.js"></script>
+    <script>
+      (() => {
+        const nav = document.getElementById("gl-nav");
+        const main = document.getElementById("gl-main");
+
+        nav.innerHTML = EPISODES.map((ep) => `<a href="#ep${ep.num}">Ep ${ep.num}</a>`).join("");
+
+        main.innerHTML = EPISODES.map((ep) => {
+          const frames = ep.files.map((file, i) => {
+            const num = String(i + 1).padStart(3, "0");
+            return `<figure class="gl-item"><img loading="lazy" src="gallery/${ep.dir}/${file}" alt="${ep.title} frame ${num}" /><figcaption class="gl-item__num">${num}</figcaption></figure>`;
+          }).join("");
+
+          return `<section class="gl-ep" id="ep${ep.num}">
+            <div class="gl-ep__head">
+              <p class="gl-ep__num">${String(ep.num).padStart(2, "0")}</p>
+              <h2 class="gl-ep__title">${ep.title}</h2>
+              <p class="gl-ep__count">${ep.count} frames</p>
+            </div>
+            <div class="gl-grid">${frames}</div>
+          </section>`;
+        }).join("");
+      })();
+    </script>
+  </body>
+</html>
