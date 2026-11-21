@@ -5,16 +5,15 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/he3vn/ReBook">github</a> · <a href="#install">install</a>
+  <a href="https://github.com/he3vn/ReBook">github</a> · <a href="https://re-bookk.netlify.app/">itry</a>
 </p>
 
 <p align="center">
 </p>
 
----
 
 <p align="center">
-   <img src="SCR-20261116-ddom.png" alt="aroe" width="800" />
+   <img src="ss3.jpeg" alt="aroe" width="800" />
 
 </p>
 
@@ -27,7 +26,7 @@ A rezero glaze site and a reader for anyone who wants to read a little bit of th
 ---
 
 ## Screenshots
-
+<img src="ss2.jpeg">
 
 ## thanks
 
