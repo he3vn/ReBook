@@ -1,4 +1,4 @@
-# aroe
+# Rebook
 
 <p align="center">
   <img src="ss1.jpeg" alt="aroe" />
@@ -26,7 +26,8 @@ A rezero glaze site and a reader for anyone who wants to read a little bit of th
 ---
 
 ## Screenshots
-<img src="ss2.jpeg">
+<img src="ss2.png">
+<img src="ss4.png">
 
 ## thanks
 
