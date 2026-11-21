@@ -29,6 +29,9 @@ A rezero glaze site and a reader for anyone who wants to read a little bit of th
 <img src="ss2.png">
 <img src="ss4.png">
 
+## How I built
+Rebook was built using webflow export from another site  since im not the best at css and me ovverriding that css with reboot so i was basically molding it from a base site you can check it out here:https://www.lesintranquilles.com/. and then html and js.
+
 ## thanks
 
 assets were made taken from the anime
