@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicbar</title>
+<style>
+.mp-bar,.mp-bar *{box-sizing:border-box;margin:0;padding:0}
+.mp-bar{display:flex;align-items:center;justify-content:flex-end;gap:10px;color:inherit;font:inherit}
+.mp-bar img{width:32px;height:32px;border-radius:4px;object-fit:cover;background:#ddd}
+.mp-t{line-height:1.25;width:140px}
+.mp-name,.mp-art{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp-name{font-size:13px;font-weight:500;color:#111}
+.mp-art{font-size:11px;color:#888}
+.mp-c{display:flex;align-items:center}
+.mp-bar button{display:grid;place-items:center;width:28px;height:28px;border:0;border-radius:50%;background:none;cursor:pointer}
+.mp-bar button:hover{background:#eee}
+.mp-bar svg{width:16px;height:16px;fill:#111}
+.mp-bar .mp-p{width:32px;height:32px;background:#111}
+.mp-p svg{fill:#fff}
+.mp-bar input{width:80px;height:3px;appearance:none;-webkit-appearance:none;border-radius:2px;outline:0;cursor:pointer;background:linear-gradient(90deg,#111 var(--p,0%),#ddd var(--p,0%))}
+.mp-bar input::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:#111}
+.mp-bar input::-moz-range-thumb{width:10px;height:10px;border:0;border-radius:50%;background:#111}
+@media(max-width:700px){.mp-art,.mp-bar input{display:none}.mp-t{width:90px}}
+</style>
+</head>
+<body>
+<div class="mp-bar" id="music-player">
+  <img alt="">
+  <div class="mp-t"><span class="mp-name"></span><span class="mp-art"></span></div>
+  <div class="mp-c">
+    <button class="mp-b" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12 18 18V6z"/></svg></button>
+    <button class="mp-p" aria-label="Play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    <button class="mp-n" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
+  </div>
+  <input type="range" value="0" min="0" max="100" step="0.1" aria-label="Seek">
+  <button class="mp-m" aria-label="Mute"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg></button>
+  <audio></audio>
+</div>
+
+<script>
+(()=>{
+const S=[
+ {src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",cover:"https://picsum.photos/seed/mp1/100",title:"Song Title 1",artist:"Artist 1"},
+ {src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",cover:"https://picsum.photos/seed/mp2/100",title:"Song Title 2",artist:"Artist 2"},
+ {src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",cover:"https://picsum.photos/seed/mp3/100",title:"Song Title 3",artist:"Artist 3"}
+];
+const r=document.getElementById("music-player"),q=s=>r.querySelector(s),
+a=q("audio"),pr=q("input"),P="M8 5v14l11-7z",U="M6 5h4v14H6zM14 5h4v14h-4z";
+let n=0;
+const bar=v=>{pr.value=v;pr.style.setProperty("--p",v+"%")},
+load=k=>{n=(k+S.length)%S.length;const s=S[n];a.src=s.src;q("img").src=s.cover;q(".mp-name").textContent=s.title;q(".mp-art").textContent=s.artist;q(".mp-t").title=s.title+" - "+s.artist;bar(0)},
+go=k=>{load(k);a.play()};
+q(".mp-p").onclick=()=>a.paused?a.play():a.pause();
+q(".mp-n").onclick=()=>go(n+1);
+q(".mp-b").onclick=()=>go(n-1);
+q(".mp-m").onclick=e=>{a.muted=!a.muted;e.currentTarget.style.opacity=a.muted?.4:1};
+a.onplay=a.onpause=()=>q(".mp-p path").setAttribute("d",a.paused?P:U);
+a.ontimeupdate=()=>bar(a.currentTime/a.duration*100||0);
+pr.oninput=()=>{a.currentTime=pr.value/100*a.duration;bar(pr.value)};
+a.onended=()=>go(n+1);
+load(0);
+})();
+</script>
+
+</body>
+</html>
