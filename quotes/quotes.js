@@ -1,8 +1,4 @@
-/*!
- * Re:Book — the moving quote cards.
- *
- * Paste real press quotes into the QUOTES array below.
- */
+
 
 (() => {
   "use strict";
