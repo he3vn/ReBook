@@ -478,3 +478,26 @@
   appearance: none;
   -webkit-appearance: none;
 }
+
+.nos_collections-title{
+  text-align: center;
+  padding-top: 7rem;
+  padding-bottom: 3.5rem;
+}
+.nos_collections-eyebrow{
+  margin: 0 0 1.75rem;
+  font-family: 'avenir-lt-pro', Arial, sans-serif;
+  font-size: .8rem;
+  font-weight: 400;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .55;
+}
+.nos_collections-heading{
+  margin: 0;
+  font-family: Champ, Arial, sans-serif;
+  font-size: clamp(2.6rem, 6.4vw, 6.5rem);
+  line-height: .9;
+  letter-spacing: -.01em;
+  text-transform: none;
+}

@@ -121,14 +121,32 @@
     if (slides.length < 2) return;
 
     const pagination = root.querySelector(".swiper-pagination");
-    const DELAY = 7000;
+    const DELAY = 3000;
     let index = 0;
     let timer = null;
+
+    const bgOf = (slide) => slide.querySelector("[data-bg]");
+
+    const loadBg = (slide) => {
+      const el = bgOf(slide);
+      if (!el) return;
+      const src = el.dataset.bg;
+      if (!src || el.dataset.loaded) return;
+      el.dataset.loaded = "1";
+      const img = new Image();
+      img.onload = () => {
+        el.style.backgroundImage = "url('" + src + "')";
+      };
+      img.src = src;
+    };
 
     slides.forEach((slide, i) => {
       slide.classList.toggle("swiper-slide-active", i === 0);
       slide.setAttribute("aria-hidden", i === 0 ? "false" : "true");
     });
+
+    loadBg(slides[0]);
+    loadBg(slides[1]);
 
     const bullets = [];
     if (pagination) {
@@ -149,6 +167,8 @@
 
     const go = (next) => {
       index = (next + slides.length) % slides.length;
+      loadBg(slides[index]);
+      loadBg(slides[(index + 1) % slides.length]);
       slides.forEach((s, i) => {
         s.classList.toggle("swiper-slide-active", i === index);
         s.setAttribute("aria-hidden", i === index ? "false" : "true");
@@ -177,6 +197,9 @@
     } else {
       start();
     }
+
+    const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1200));
+    idle(() => slides.forEach(loadBg));
   })();
 
   

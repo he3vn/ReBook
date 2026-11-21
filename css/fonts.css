@@ -40,6 +40,30 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Champ';
+  src: url('../fonts/champ-extrabold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: url('../fonts/degular-semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hello Organichand Webfont';
+  src: url('../fonts/organichand.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 
 
 
