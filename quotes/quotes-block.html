@@ -1,0 +1,128 @@
+<!-- ============ MY FAVORITE QUOTES — paste this whole block ============ -->
+<style>
+  .rb-quotes {
+    padding: 70px 16px 90px;
+    background: #f2efe9;
+    font-family: "avenir-lt-pro", "Avenir Next", Avenir, Arial, sans-serif;
+    color: #1d1d1d;
+  }
+  .rb-quotes-title {
+    margin: 0 0 50px;
+    text-align: center;
+    font-family: Champ, Arial, sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+  .rb-quotes-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .rb-quote {
+    position: relative;
+    flex: 0 0 320px;
+    margin-left: -120px;
+    padding: 30px 28px 24px;
+    border-radius: 20px;
+    background: var(--c, #e6d3b3);
+    color: #1d1d1d;
+    font-family: Degular, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.45;
+    text-align: center;
+    box-shadow: 0 24px 48px rgba(29, 29, 29, 0.16);
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.3s ease;
+  }
+  .rb-quote:first-child {
+    margin-left: 0;
+  }
+  .rb-quote-text {
+    margin: 0 0 16px;
+  }
+  .rb-quote-by {
+    margin: 0;
+    font-size: 16px;
+    opacity: 0.65;
+  }
+  @media (max-width: 760px) {
+    .rb-quotes-list {
+      flex-direction: column;
+      gap: 16px;
+    }
+    .rb-quote {
+      flex: 0 0 auto;
+      width: min(320px, 84vw);
+      margin-left: 0;
+      font-size: 17px;
+    }
+  }
+</style>
+
+<div class="rb-quotes">
+  <h2 class="rb-quotes-title">My favorite<br />quotes</h2>
+  <div class="rb-quotes-list">
+    <article class="rb-quote" style="--c: #e6d3b3">
+      <p class="rb-quote-text">The one Julius relied on, the one Beatrice believed in, the one Echidna forgave, and the one you, Emilia, wished for… If that man's name is Natsuki Subaru, then…I am Natsuki Subaru</p>
+      <p class="rb-quote-by">— Subaru</p>
+    </article>
+    <article class="rb-quote" style="--c: #cddde6">
+      <p class="rb-quote-text">I know. Because I'm always watching you, Subaru-kun. Even if nobody in the world believes in you, and even if you don't believe in yourself... I will believe in you.</p>
+      <p class="rb-quote-by">— Rem</p>
+    </article>
+    <article class="rb-quote" style="--c: #e7c9c3">
+      <p class="rb-quote-text">I know you're scared out of your minds! Because I'm scared too! I have no special powers.I'm weak, I'm pathetic, and honestly, every time something goes wrong, I want to run away and cry!But even so... I'm still standing here!</p>
+      <p class="rb-quote-by">— Subaru</p>
+    </article>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const list = document.querySelector(".rb-quotes-list");
+    if (!list) return;
+
+    const cards = Array.from(list.querySelectorAll(".rb-quote"));
+    const rand = (min, max) => min + Math.random() * (max - min);
+    const step = 60;
+
+    const place = (card, x, r, scale, z) => {
+      card.style.transform = "translate(" + x + "px, 0px) rotate(" + r + "deg) scale(" + scale + ")";
+      card.style.zIndex = String(z);
+    };
+
+    cards.forEach((card, i) => {
+      card.dataset.rot = String(rand(-3, 3));
+      place(card, 0, Number(card.dataset.rot), 1, i + 1);
+    });
+
+    const setActive = (index) => {
+      cards.forEach((card, n) => {
+        const on = n === index;
+        const shift = on ? 0 : n < index ? -step : step;
+        place(card, shift, on ? 0 : Number(card.dataset.rot), on ? 1.05 : 1, on ? 9 : n + 1);
+      });
+    };
+
+    const reset = () => {
+      cards.forEach((card, n) => place(card, 0, Number(card.dataset.rot), 1, n + 1));
+    };
+
+    list.addEventListener("mousemove", (event) => {
+      let hit = -1;
+      cards.forEach((card, n) => {
+        const box = card.getBoundingClientRect();
+        if (event.clientX >= box.left && event.clientX <= box.right) hit = n;
+      });
+      if (hit === -1) reset();
+      else setActive(hit);
+    });
+
+    list.addEventListener("mouseleave", reset);
+  })();
+</script>
+<!-- ============ end quotes ============ -->

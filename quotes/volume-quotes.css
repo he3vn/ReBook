@@ -1,0 +1,79 @@
+/* Quotes — shared by every volume page. No JavaScript, pure CSS. */
+
+.rb-quotes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px 20px;
+}
+
+.rb-quote {
+  position: relative;
+  flex: 0 0 320px;
+  margin-left: -6em;
+  padding: 28px 26px 22px;
+  border-radius: 20px;
+  background: #e6d3b3;
+  color: #1d1d1d;
+  font-family: Degular, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.45;
+  text-align: center;
+  box-shadow: 0 24px 48px rgba(29, 29, 29, 0.16);
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s ease;
+}
+
+.rb-quote:first-child {
+  margin-left: 0;
+}
+
+.rb-quote p {
+  margin: 0 0 14px;
+}
+
+.rb-quote p:last-child {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.65;
+}
+
+.rb-quote:nth-child(1) {
+  transform: rotate(3deg);
+  z-index: 3;
+}
+
+.rb-quote:nth-child(2) {
+  transform: rotate(-2deg);
+  background: #cddde6;
+  z-index: 2;
+}
+
+.rb-quote:nth-child(3) {
+  transform: rotate(1deg);
+  background: #e7c9c3;
+  z-index: 1;
+}
+
+.rb-quote:hover {
+  transform: rotate(0deg) scale(1.04);
+  z-index: 5;
+  box-shadow: 0 30px 60px rgba(29, 29, 29, 0.22);
+}
+
+@media (max-width: 760px) {
+  .rb-quotes {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .rb-quote {
+    flex: 0 0 auto;
+    width: min(320px, 84vw);
+    margin-left: 0;
+    font-size: 17px;
+    transform: rotate(0deg) !important;
+  }
+}

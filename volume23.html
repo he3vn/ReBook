@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Volume23</title>
+    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="quotes/volume-quotes.css">
     <style>
       .rb-slider-wrap,
       .rb-list {
@@ -45,6 +47,68 @@
         font-size: 21px !important;
         font-weight: 600 !important;
         line-height: 1.2 !important;
+      }
+      .rb-quote {
+        position: relative;
+        flex: 0 0 320px;
+        margin-left: -6em;
+        padding: 28px 26px 22px;
+        border-radius: 20px;
+        background: 20px;
+        color: #1d1d1d;
+        font-family: Degular,Arial, sans-serif;
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 1.45;
+        text-align: center;
+        box-shadow: 0 24px 48px rgba(29,29,29, 0.16);
+        transition: transform 0.8s cubic-bezier(0.2,0.8,0.2,1),
+          box-shadow 0.3s ease;
+      }
+      .rb-quote:first-child {
+        margin-left: 0;
+      }
+      .rb-quote p{
+        margin: 0 0 14px;
+      }
+      .rb-quote p:last-child {
+        margin: 0;
+        font-size: 16px;
+        opacity: 0.65;
+      }
+      .rb-quote:nth-child(1) {
+        transform: rotate(3deg);
+        background: #e6ff2b;
+        z-index: 3;
+      }
+      .rb-quote:nth-child(2) {
+        transform: rotate(-2deg);
+        background: #f20909;
+        z-index: 2;
+      }
+      .rb-quote:nth-child(3) {
+        transform: rotate(1deg);
+        background: #25eb0a;
+        z-index: 1;
+      }
+      .rb-quote:hover {
+        transform: rotate(0deg) scale(1.04);
+        z-index: 5;
+        box-shadow: 0 30px 60px rgba(29,29,29,O.22);
+      }
+      @media (max-width: 760px) {
+        .rb-quotes {
+          flex-direction: column;
+          gap: 16px;
+          align-items: center;
+        }
+        .rb-quote {
+          flex: 0 0 auto;
+          width: min(320px,84vw);
+          margin-left: 0;
+          font-size: 17px;
+          transform: rotate(0deg) !important;
+        }
       }
     </style>
   </head>
@@ -94,5 +158,34 @@
     <br>
     <br>
     <div class="card" style="font-family: Champ, Arial, serif; font-weight: 700; font-size: 94px; color: #222; text-align: center;">Best quotes</div>
+    
+    <div class="rb-quotes">
+      <article class="rb-quote">
+        <p>"My name is Subaru Natsuki.The man Julius trusted,Beatrice believed in,Echidna forgave... and you,Emilia,hope for...If his name is Subaru Natsuki,then I'm Subaru Natsuki"</p>
+        <p>— Subaru</p>
+      </article>
+      <article class="rb-quote">
+        <p>"Maybe there are stronger or smarter people around.But I prefer you,Subaru"</p>
+        <p>— Emilia</p>
+      </article>
+      <article class="rb-quote">
+        <p>"You think this is an act?Are you seriously trying to say what I'm doing now is an act?<br>If I was that good at acting,don't you think I'd act something better than this?Why the hell would i want to be a disgusting creep like Subaru Natsuki?"</p>
+        <p>— Subaru</p>
+    </div>
+    <div class="card" style="font-family: Champ, Arial, serif; font-weight: 700; font-size: 94px; color: #222; text-align: center;">Read it here!</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+    <div id="reader-wrapper" style="max-width: 900px; margin: 60px auto;padding:20px;border:1px solid #ddd; border-radius: 16px; background: #fff;">
+      <div style="display: flex; justify-content: space-between;align-items: center;margin-bottom: 16px;font-family: Degular,Arial,sans-serif;">
+        <button id="prev-btn" style="padding: 10px 20px; border-radius: 999px; border: none; background: #222; color: #fff; cursor: pointer; font-size: 16px;">← Previous</button>
+        <select id="toc-select" style="padding: 8px 14px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; max-width: 300px;"></select>
+        <button id="next-btn" style="padding: 10px 20px; border-radius: 999px; border: none; background: #222; color: #fff; cursor: pointer; font-size: 16px;">Next →</button>
+      </div>
+
+      <div id="viewer" style="width: 100%;height: 650px;overflow: hidden;"></div>
+    </div>
+
+  
   </body>
+
 </html>
