@@ -1,0 +1,480 @@
+<!--Ima try a different style of html btw mostly divs-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volume23</title>
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/slider.css">
+    <link rel="stylesheet" href="../quotes/volume-quotes.css">
+    <style>
+      .rb-slider-wrap,
+      .rb-list {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        overflow: visible !important;
+      }
+
+      .rb-slider-wrap {
+        margin-top: 14px !important;
+      }
+
+      .rb-list-inner {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        gap: 9px !important;
+        width: auto !important;
+        max-width: none !important;
+      }
+
+      .rb-list-item {
+        flex-shrink: 0 !important;
+      }
+
+      .tag-small {
+        display: inline-flex !important;
+        align-items: center !important;
+        height: auto !important;
+        padding: 9px 21px !important;
+        border-radius: 999px !important;
+      }
+
+      .tag-small,
+      .tag-small__text {
+        font-size: 21px !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
+      }
+
+      .rb-quote {
+        position: relative;
+        flex: 0 0 320px;
+        margin-left: -6em;
+        padding: 28px 26px 22px;
+        border-radius: 20px;
+        color: #1d1d1d;
+        font-family: Degular, Arial, sans-serif;
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 1.45;
+        text-align: center;
+        box-shadow: 0 24px 48px rgba(29, 29, 29, 0.16);
+        transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+          box-shadow 0.3s ease;
+      }
+
+      .rb-quote:first-child {
+        margin-left: 0;
+      }
+
+      .rb-quote p {
+        margin: 0 0 14px;
+      }
+
+      .rb-quote p:last-child {
+        margin: 0;
+        font-size: 16px;
+        opacity: 0.65;
+      }
+
+      .rb-quote:nth-child(1) {
+        transform: rotate(3deg);
+        background: #e6ff2b;
+        z-index: 3;
+      }
+
+      .rb-quote:nth-child(2) {
+        transform: rotate(-2deg);
+        background: #f20909;
+        z-index: 2;
+      }
+
+      .rb-quote:nth-child(3) {
+        transform: rotate(1deg);
+        background: #25eb0a;
+        z-index: 1;
+      }
+
+      .rb-quote:hover {
+        transform: rotate(0deg) scale(1.04);
+        z-index: 5;
+        box-shadow: 0 30px 60px rgba(29, 29, 29, 0.22);
+      }
+
+      @media (max-width: 760px) {
+        .rb-quotes {
+          flex-direction: column;
+          gap: 16px;
+          align-items: center;
+        }
+        .rb-quote {
+          flex: 0 0 auto;
+          width: min(320px, 84vw);
+          margin-left: 0;
+          font-size: 17px;
+          transform: rotate(0deg) !important;
+        }
+      }
+
+      #reader-wrapper {
+        max-width: 960px;
+        margin: 40px auto 80px;
+        border: 1.5px solid #e5e5e5;
+        border-radius: 24px;
+        background: #ffffff;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.07);
+        overflow: hidden;
+        font-family: Degular, Arial, sans-serif;
+        transition: background 0.25s ease, border-color 0.25s ease;
+      }
+
+      .reader-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 24px;
+        background: rgba(0, 0, 0, 0.025);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+        flex-wrap: wrap;
+      }
+
+      .reader-center-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        flex: 1;
+        flex-wrap: wrap;
+      }
+
+      .reader-btn {
+        padding: 9px 18px;
+        border-radius: 999px;
+        border: none;
+        background: #1d1d1d;
+        color: #fff;
+        font-family: Degular, Arial, sans-serif;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: transform 0.15s ease, background 0.15s ease;
+      }
+
+      .reader-btn:hover {
+        background: #ff0000;
+        transform: translateY(-1px);
+      }
+
+      .reader-btn:active {
+        transform: scale(0.97);
+      }
+
+      #toc-select {
+        min-width: 180px;
+        max-width: 340px;
+        padding: 9px 16px;
+        border-radius: 999px;
+        border: 1.5px solid rgba(0, 0, 0, 0.14);
+        background: #fff;
+        color: #1d1d1d;
+        font-family: Degular, Arial, sans-serif;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        outline: none;
+      }
+
+      .reader-controls-group {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .theme-dot {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: transform 0.15s ease;
+      }
+
+      .theme-dot:hover {
+        transform: scale(1.15);
+      }
+
+      .font-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(0, 0, 0, 0.15);
+        background: transparent;
+        color: inherit;
+        font-family: Degular, Arial, sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 1;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #viewer {
+        width: 100%;
+        height: 680px;
+        padding: 16px 32px;
+        box-sizing: border-box;
+      }
+
+      .reader-footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 24px;
+        font-size: 14px;
+        font-weight: 600;
+        border-top: 1px solid rgba(0, 0, 0, 0.07);
+      }
+
+      .progress-track {
+        width: 100%;
+        max-width: 420px;
+        height: 6px;
+        background: rgba(128, 128, 128, 0.2);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      #progress-fill {
+        height: 100%;
+        width: 0%;
+        background: #f90000;
+        border-radius: 999px;
+        transition: width 0.25s ease;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="card" style="font-family: Degular, serif; font-weight: 600; font-size: 24px; color: #222; text-align: center;">Tappei Nagatsuki</div>
+    <div class="card" style="font-family: Champ, Arial, serif; font-weight: 700; font-size: 94px; color: #222; text-align: center;">Volume 23</div>
+
+    <div class="rb-slider-wrap">
+      <div class="books-slider__genre-list-wrap rb-list">
+        <div class="books-slider__genre-list rb-list-inner" role="list">
+
+          <div class="books-slider__genre-list-item rb-list-item" role="listitem">
+            <span class="tag-small" style="background-color: #9e81e4; color: white;">
+              <span class="tag-small__text">Fantasy</span>
+            </span>
+          </div>
+
+          <div class="books-slider__genre-list-item rb-list-item" role="listitem">
+            <span class="tag-small" style="background-color: #e6ff2b; color: black;">
+              <span class="tag-small__text">Light novel</span>
+            </span>
+          </div>
+
+          <div class="books-slider__genre-list-item rb-list-item" role="listitem">
+            <span class="tag-small" style="background-color: #00ecef; color: black;">
+              <span class="tag-small__text">Aura farm</span>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <img src="../23.png" alt="Volume 23 Cover" style="display: block; margin: 24px auto 0; width: 320px; height: auto;">
+    <br>
+    <br>
+    <br>
+
+    <div class="content" style="font-family: Degular, Arial, sans-serif; font-style: italic; font-weight: 600; font-size: 64px; color: #222; text-align: left; padding-left: 140px; padding-right: 140px;">Re:Zero, Starting Life in Another World-Volume23</div>
+    <div class="content" style="font-family: Degular, Arial, sans-serif; font-weight: 300 !important; -webkit-font-smoothing: antialiased; font-size: 24px; line-height: 1.45; color: #222; text-align: left; padding-left: 140px; display: inline-block; vertical-align: top;">Subaru basically loses his memories but doesn't realise<br>his worth in the group which results in a few failed loops<br><br>It also leads to the most peak moment of arc6 which is <br>Subaru telling his name to Emilia after he lost it which was<br>very emotional and proves why this is my best volume. ^_^</div>
+    <div class="content" style="font-family: Degular, Arial, sans-serif; font-weight: 300 !important; -webkit-font-smoothing: antialiased; font-size: 24px; line-height: 1.45; color: #222; text-align: left; padding-left: 120px; display: inline-block; vertical-align: top;">ReBook keeps the whole library together,<br>You can read it below,fam</div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="card" style="font-family: Champ, Arial, serif; font-weight: 700; font-size: 94px; color: #222; text-align: center;">Best quotes</div>
+    
+    <div class="rb-quotes">
+      <article class="rb-quote">
+        <p>"My name is Subaru Natsuki.The man Julius trusted,Beatrice believed in,Echidna forgave... and you,Emilia,hope for...If his name is Subaru Natsuki,then I'm Subaru Natsuki"</p>
+        <p>— Subaru</p>
+      </article>
+      <article class="rb-quote">
+        <p>"Maybe there are stronger or smarter people around.But I prefer you,Subaru"</p>
+        <p>— Emilia</p>
+      </article>
+      <article class="rb-quote">
+        <p>"You think this is an act?Are you seriously trying to say what I'm doing now is an act?<br>If I was that good at acting,don't you think I'd act something better than this?Why the hell would i want to be a disgusting creep like Subaru Natsuki?"</p>
+        <p>— Subaru</p>
+      </article>
+    </div>
+
+    <div class="card" style="font-family: Champ, Arial, serif; font-weight: 700; font-size: 94px; color: #222; text-align: center;">Read it here!</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+
+    <div id="reader-wrapper">
+      <div class="reader-toolbar">
+        <button id="prev-btn" class="reader-btn">← Prev</button>
+
+        <div class="reader-center-controls">
+          <select id="toc-select">
+            <option value="">Loading chapters...</option>
+          </select>
+
+          <div class="reader-controls-group">
+            <button id="font-dec" class="font-btn" title="Smaller text">-</button>
+            <button id="font-inc" class="font-btn" title="Larger text">+</button>
+            <button class="theme-dot" data-theme="light" style="background: #ffffff;" title="Light mode"></button>
+            <button class="theme-dot" data-theme="sepia" style="background: #f5efe0;" title="Sepia mode"></button>
+            <button class="theme-dot" data-theme="dark" style="background: #18181b;" title="Dark mode"></button>
+          </div>
+        </div>
+
+        <button id="next-btn" class="reader-btn">Next →</button>
+      </div>
+
+      <div id="reader-status" style="text-align: center; padding: 20px; color: #666;">Loading Volume 23...</div>
+      <div id="viewer"></div>
+
+      <div class="reader-footer">
+        <div class="progress-track"><div id="progress-fill"></div></div>
+        <span id="page-percent">0%</span>
+      </div>
+    </div>
+
+    <script src="../volume23-data.js"></script>
+
+    <script>
+      const statusEl = document.getElementById("reader-status");
+      const select = document.getElementById("toc-select");
+      const wrapper = document.getElementById("reader-wrapper");
+      const progressFill = document.getElementById("progress-fill");
+      const pagePercent = document.getElementById("page-percent");
+
+      function base64ToArrayBuffer(base64) {
+        const binaryString = atob(base64);
+        const bytes = new Uint8Array(binaryString.length);
+        for (let i = 0; i < binaryString.length; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+        return bytes.buffer;
+      }
+
+      if (!window.EPUB_BASE64) {
+        statusEl.textContent = "volume23-data.js not found.";
+      } else {
+        const buffer = base64ToArrayBuffer(window.EPUB_BASE64);
+        const book = ePub(buffer);
+        const rendition = book.renderTo("viewer", {
+          width: "100%",
+          height: 648,
+          spread: "none"
+        });
+
+        rendition.themes.register("light", { body: { background: "#ffffff", color: "#1d1d1d", "line-height": "1.65" } });
+        rendition.themes.register("sepia", { body: { background: "#f5efe0", color: "#3b3228", "line-height": "1.65" } });
+        rendition.themes.register("dark",  { body: { background: "#18181b", color: "#e4e4e7", "line-height": "1.65" } });
+        rendition.themes.select("light");
+
+        let currentFontSize = 105;
+        rendition.themes.fontSize(currentFontSize + "%");
+
+        rendition.display().then(() => {
+          statusEl.style.display = "none";
+          return book.locations.generate(1600);
+        });
+
+        document.getElementById("prev-btn").onclick = () => rendition.prev();
+        document.getElementById("next-btn").onclick = () => rendition.next();
+        document.addEventListener("keyup", (e) => {
+          if (e.key === "ArrowLeft") rendition.prev();
+          if (e.key === "ArrowRight") rendition.next();
+        });
+
+        document.getElementById("font-inc").onclick = () => {
+          currentFontSize = Math.min(160, currentFontSize + 10);
+          rendition.themes.fontSize(currentFontSize + "%");
+        };
+        document.getElementById("font-dec").onclick = () => {
+          currentFontSize = Math.max(80, currentFontSize - 10);
+          rendition.themes.fontSize(currentFontSize + "%");
+        };
+
+        document.querySelectorAll(".theme-dot").forEach((dot) => {
+          dot.onclick = () => {
+            const theme = dot.dataset.theme;
+            rendition.themes.select(theme);
+            if (theme === "dark") {
+              wrapper.style.background = "#18181b";
+              wrapper.style.color = "#e4e4e7";
+              wrapper.style.borderColor = "#2e2e32";
+            } else if (theme === "sepia") {
+              wrapper.style.background = "#f5efe0";
+              wrapper.style.color = "#3b3228";
+              wrapper.style.borderColor = "#e0d6be";
+            } else {
+              wrapper.style.background = "#ffffff";
+              wrapper.style.color = "#1d1d1d";
+              wrapper.style.borderColor = "#e5e5e5";
+            }
+          };
+        });
+
+        book.loaded.navigation.then((nav) => {
+          select.innerHTML = "";
+          function addTocItems(items, depth = 0) {
+            items.forEach((chapter) => {
+              const option = document.createElement("option");
+              option.textContent = (depth > 0 ? "— ".repeat(depth) : "") + chapter.label.trim();
+              option.value = chapter.href;
+              select.appendChild(option);
+              if (chapter.subitems && chapter.subitems.length > 0) {
+                addTocItems(chapter.subitems, depth + 1);
+              }
+            });
+          }
+          addTocItems(nav.toc);
+          select.onchange = (e) => rendition.display(e.target.value);
+        });
+
+        rendition.on("relocated", (location) => {
+          if (!location || !location.start) return;
+
+          const currentHref = location.start.href.split("#")[0];
+          const currentFile = currentHref.split("/").pop();
+          for (let i = 0; i < select.options.length; i++) {
+            const optionHref = select.options[i].value.split("#")[0];
+            const optionFile = optionHref.split("/").pop();
+            if (optionHref === currentHref || optionFile === currentFile) {
+              select.selectedIndex = i;
+              break;
+            }
+          }
+
+          if (book.locations.length() > 0) {
+            const pct = Math.round(book.locations.percentageFromCfi(location.start.cfi) * 100);
+            progressFill.style.width = pct + "%";
+            pagePercent.textContent = pct + "%";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
